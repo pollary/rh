@@ -1,7 +1,7 @@
 	</div>
 	<footer class="footer fixed-bottom">
 	  <div class="container">
-	    <span class="text-muted">Copyright © Câmara Municipal de Palmas</span>
+	    <span class="text-muted">Copyright © Dyego Santos Morais</span>
 	  </div>
 	</footer>
 

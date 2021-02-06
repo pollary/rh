@@ -35,7 +35,7 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title w-100 text-center">Número do Chamado</h5>
+        <h5 class="modal-title w-100 text-center">Nome Do Funcionario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Câmara Municipal de Palmas - Sistema de Chamados</title>
+	<title>Secretaria de Desenvolvimento Social - Sistema de RH</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" type="text/css" href="{{asset('vendor/css/bootstrap.min.css')}}">
@@ -17,7 +17,7 @@
     <header>
 
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Sistema de Chamados</a>
+        <a class="navbar-brand" href="#">Sistema do RH</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,7 +30,7 @@
               <a class="nav-link" href="#">Admin</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('suporte/chamados')}}">Chamados</a>
+              <a class="nav-link" href="{{url('suporte/chamados')}}">Funcionarios</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Base de Conhecimento</a>
