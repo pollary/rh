@@ -2,10 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ChamadoController;
-use App\Http\Controllers\SuporteController;
-use App\Http\Controllers\AssuntoController;
-use App\Http\Controllers\AssuntoDetalheController;
+use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -21,15 +18,9 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class,'index']);
+Route::resource('funcionarios',FuncionarioController::class);       //resource = get,post,edit,delete
 
 
-Route::group(['prefix' => 'suporte'], function () {
-	Route::get('',[SuporteController::class,'index']);
-	Route::get('painel',[SuporteController::class,'dashboard']);
-	Route::resource('chamados',ChamadoController::class);
-	Route::resource('assuntos',AssuntoController::class);
-	Route::resource('assuntos-detalhes',AssuntoDetalheController::class);
-});
 
 //Endereço antigo:
 //http://187.115.70.244:4556/sig/app.html#/servicosonline/portal-servidor

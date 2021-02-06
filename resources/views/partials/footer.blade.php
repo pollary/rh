@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="{{asset('vendor/js/bootstrap.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('vendor/js/bootstrap.bundle.min.js')}}"></script>
 
-	@yield('js')
+	@yield('js')    <!--  Espaço reservado para o Java script  -->
 
 </body>
 </html>

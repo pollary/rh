@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreatePrioridadesTable extends Migration
+class CreateCargosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePrioridadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('prioridades', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('descricao');
+        Schema::create('cargos', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
+            $table->string("descricao");
         });
     }
 
@@ -27,6 +27,6 @@ class CreatePrioridadesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prioridades');
+        Schema::dropIfExists('cargos');
     }
 }

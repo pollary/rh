@@ -30,7 +30,7 @@
               <a class="nav-link" href="#">Admin</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('suporte/chamados')}}">Funcionarios</a>
+              <a class="nav-link" href="{{url('/funcionarios')}}">Funcionarios</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Base de Conhecimento</a>

@@ -107,7 +107,7 @@ textarea.form-control {
   width: 100vw;
   height: 100vh;
   background: #ffffff;
-  /*background-image: url('../img/camara-bg.jpg');*/
+  /*background-image: url('../img/camara-bg.jpg'); FOTO DE FUNDO DA HOME*/
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed; 

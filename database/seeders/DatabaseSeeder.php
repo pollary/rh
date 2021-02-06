@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Database\Seeders\AssuntoSeeder;
-use Database\Seeders\DepartamentoSeeder;
+use Database\Seeders\CargoSeeder;
+use Database\Seeders\SecretariaSeeder;
+use Database\Seeders\VinculoSeeder;
 
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AssuntoSeeder::class);
-        $this->call(DepartamentoSeeder::class);
+        $this->call(CargoSeeder::class);
+        $this->call(SecretariaSeeder::class);
+        $this->call(VinculoSeeder::class);
     }
 }

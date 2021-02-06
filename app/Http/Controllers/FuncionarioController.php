@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\AssuntoDetalhe;
 use Illuminate\Http\Request;
+use App\Models\Cargo;
+use App\Models\Secretaria;
+use App\Models\Vinculo;
 
-class AssuntoDetalheController extends Controller
+class FuncionarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,14 @@ class AssuntoDetalheController extends Controller
      */
     public function index()
     {
-        //
+        $cargos = Cargo::all();
+        $secretaria = Secretaria::all();
+        $vinculo = Vinculo::all();
+        
+        //dd(compact(['cargos','secretaria','vinculo'])); Funçao De Debugar
+        
+
+        return view('funcionarios.index', compact(['cargos','secretaria','vinculo']));
     }
 
     /**
@@ -41,10 +50,10 @@ class AssuntoDetalheController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\AssuntoDetalhe  $assuntoDetalhe
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(AssuntoDetalhe $assuntoDetalhe)
+    public function show($id)
     {
         //
     }
@@ -52,10 +61,10 @@ class AssuntoDetalheController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\AssuntoDetalhe  $assuntoDetalhe
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(AssuntoDetalhe $assuntoDetalhe)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +73,10 @@ class AssuntoDetalheController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AssuntoDetalhe  $assuntoDetalhe
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AssuntoDetalhe $assuntoDetalhe)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +84,10 @@ class AssuntoDetalheController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AssuntoDetalhe  $assuntoDetalhe
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AssuntoDetalhe $assuntoDetalhe)
+    public function destroy($id)
     {
         //
     }

@@ -7,7 +7,7 @@
   <div class="container main-container">
     <div class="row">
       <div class="col-sm-6 col-md-6 card-center">
-        <a href="{{ route('chamados.create') }}">
+        <a href="{{ route('funcionarios.create') }}">
         <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
           <div class="card-header">Cadastrar Novo Funcionario</div>
           <div class="card-body">
@@ -63,7 +63,7 @@
     event.preventDefault();
     console.log("gogogo");
     var id = document.getElementById('chamado-id').value;
-    var url = "{{ url('/chamados') }}/"+id; //Trocando o html ':id' pelo valor real do id
+    var url = "{{ url('/funcionarios') }}/"+id; //Trocando o html ':id' pelo valor real do id
     //console.log(url); 
     window.location.href = url;
   });

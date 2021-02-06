@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateAssuntosTable extends Migration
+class CreateSecretariasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateAssuntosTable extends Migration
      */
     public function up()
     {
-        Schema::create('assuntos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('descricao');
+        Schema::create('secretarias', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
+            $table->string("descricao");
         });
     }
 
@@ -27,6 +27,6 @@ class CreateAssuntosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assuntos');
+        Schema::dropIfExists('secretarias');
     }
 }
