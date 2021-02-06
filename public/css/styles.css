@@ -1,0 +1,188 @@
+.footer{
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */  
+}
+
+.main-container{
+	padding-top: 25%;
+}
+
+.card {
+	margin: 0 auto; /* Added */
+	float: none; /* Added */
+	margin-bottom: 10px; /* Added */
+}
+
+.bg-teal{
+	background-color: teal;
+}
+
+.card-header{
+	text-align: center;
+}
+
+.fa-big{
+	font-size: 70px;
+}
+
+.card-center{
+	margin: 0px auto; text-align: center;
+}
+
+.footer{
+	text-align: center;
+}
+
+.red{
+	color: red;
+}
+
+textarea.form-control {
+    width: 100%;
+}
+
+.estatisticas{
+  margin-top: 15px;
+}
+
+/* Loader */
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+
+
+#principal{
+  content: '';
+  /*position: fixed;*/
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  background-image: url('../img/camara-bg.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+
+/* Top position labels */
+
+.informacoes fieldset{
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.informacoes legend{
+  margin-left: 5px;
+  width: unset;
+}
+
+.informacoes p{
+  margin-left: 5px;
+}
+
+/* Tabela-Departamento */
+#tabela-departamento th, #tabela-departamento td{
+  text-align: center;
+}
+
+#tabela-departamento th[scope=row]:first-child{
+  text-align: left;
+}
+
+@media only screen and (max-width: 1920px) {
+  .main-container{
+    padding-top: 32%;
+  }
+}
+
+
+
+@media only screen and (max-width: 1500px) {
+  .main-container{
+    padding-top: 15%;
+  }
+}
+
+
+@media only screen and (max-width: 1300px) {
+	.main-container{
+		padding-top: 10%;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+  .main-container{
+    padding-top: 35%;
+  }
+}
+
+
+@media only screen and (max-width: 800px) {
+	.main-container{
+		padding-top: 50%;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	.main-container{
+		padding-top: 25%;
+	}
+
+  footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+}
