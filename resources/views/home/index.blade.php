@@ -9,7 +9,7 @@
       <div class="col-sm-6 col-md-6 card-center">
         <a href="{{ route('chamados.create') }}">
         <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-          <div class="card-header">Abrir novo chamado (Ticket)</div>
+          <div class="card-header">Cadastrar Novo Funcionario</div>
           <div class="card-body">
             <h5 class="card-title"><i class="fa fa-ticket fa-big" aria-hidden="true"></i></h5>
           </div>
@@ -19,7 +19,7 @@
       <div class="col-sm-6 col-md-6 card-center">
         <a href="#" id="status-btn" data-toggle="modal" data-target=".bd-example-modal-sm">
         <div class="card text-white bg-teal mb-3" style="max-width: 18rem;">
-          <div class="card-header">Consultar Status do Chamado</div>
+          <div class="card-header">Consultar Funcionario</div>
           <div class="card-body">
             <h5 class="card-title"><i class="fa fa-book fa-big" aria-hidden="true"></i></h5>
           </div>
