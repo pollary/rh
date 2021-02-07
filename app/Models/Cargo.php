@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cargo extends Model
 {
+    protected $primaryKey = "id"; 
     public $timestamps = true;
     protected $fillable=['descricao'];
 }

@@ -1,183 +1,65 @@
 @extends('layouts.app')
 
-@section('css')
-  <link rel="stylesheet" type="text/css" href="{{asset('vendor/css/bootstrap-select.min.css')}}">
+
+@section('css')   
+
+    <style>
+        .ponteiro{
+            cursor: pointer;
+        }
+    </style>
 
 @endsection
 
+
 @section('content')
 
-<main role="main" class="container"> <br><br>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12 col-md-12">
-			<div class="jumbotron">
-        <h1 style="text-align: center;">CRIAR CHAMADO</h1>
-        <div class="box-ticket">
-          <form>
-            @csrf
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label for="email">Email <span class="red">*</span></label>
-                <input type="email" class="form-control" name="email" id="email">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="nome">Nome Completo <span class="red">*</span></label>
-              <input type="text" class="form-control" name="nome" id="nome">
-            </div>
-            <div class="form-group">
-              <label for="telefone">Telefone <span class="red">*</span></label>
-              <input type="text" class="form-control" name="telefone" id="telefone">
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="departamento">Departamento</label>
-                <select id="departamento" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
-                  <option selected>Escolha...</option>
-                  @foreach($departamentos as $departamento)
-                    <option value="{{$departamento->id}}">{{$departamento->descricao}}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="assunto">Assunto</label>
-                <select id="assunto" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
-                  <option selected>Escolha...</option>
-                  @foreach($assuntos as $assunto)
-                    @if ($loop->first)
-                        <option id="problema-computador" value="{{$assunto->id}}">{{$assunto->descricao}}</option>
-                    @else
-                        <option value="{{$assunto->id}}">{{$assunto->descricao}}</option>
-                    @endif
-                  @endforeach
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row" id="select-problema">
-              <div class="form-group col-md-4">
-                <label for="detalhes">Especifique o Problema</label>
-                <select id="detalhes" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
-                  <option selected>Escolha...</option>
-                  @foreach($detalhes as $detalhe)
-                        <option value="{{$detalhe->id}}">{{$detalhe->descricao}}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <label for="comment">Descreva a Ocorrência: <span class="red">*</span></label>
-              <div class="input-group">
-                <textarea class="form-control" rows="5" name="ocorrencia" id="ocorrencia"></textarea>
-              </div>  
-            </div>
-
-
-              <div class="form-group" style="margin-top: 10px; text-align: center;">
-                <button type="submit" class="btn btn-primary" id="enviarBtn">Registrar</button>
-              </div>
-          </form>
-
-          <div id="resultado" style="display:none;" class="animate-bottom">
-            Ticket criado com sucesso! <br>
-            O identificador(id) é: <b>522-BDA-QB8</b>.
-            Visualize o status do seu chamado <a href="./status.html?id=1">aqui</a>.
-          </div>
-          <div id="erro" style="display:none;" class="animate-bottom">
-            <b style="color: red;">Erro:</b><br>
-            Ocorreu um problema! <br>
-            O ticket não foi criado, tente novamente.
-          </div>  
-        </div>
+<main role="main" class="container">
+      
+  <div class="container" style="padding-top: 7rem;">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+      <table class="table table-dark table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Matrícula</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Telefone</th>
+          </tr>
+        </thead>
+        <tbody>
+          @forelse ($funcionarios ?: [] as $funcionario)
+                <tr class="ponteiro" role="button" data-href="{{url("/funcionarios/{$funcionario->id}")}}">
+                    <th scope="row">{{$funcionario->matricula}}</th>
+                    <td>{{$funcionario->nome}}</td>
+                    <td>{{$funcionario->cpf}}</td>
+                    <td>{{$funcionario->telefone}}</td>            
+                </tr>
+          @empty
+          <tr>
+            <td colspan="6" class="text-center">Parabéns!!! Não existem funcionarios abertos!</td>
+          </tr>
+          @endforelse
+        </tbody>
+      </table>
       </div>
     </div>
   </div>
-</div><div id="loader"></div>
+
 </main>
 
 @endsection
 
-
 @section('js')
+<script type="text/javascript">
 
-  <script type="text/javascript" src="{{asset('vendor/js/bootstrap-select.min.js')}}"></script>
+//FUNÇAO DE DEIXAR A LINHA CLICAVEL
+$(function(){            
+     $(".table").on("click", "tr[role=\"button\"]", function (e) {
+          window.location = $(this).data("href");
+     });
+});
 
-  <script type="text/javascript">
-   
-
-    var loader = document.getElementById("loader");
-    document.getElementById("loader").style.display = "none";
-
-    var selectProblema = document.getElementById("select-problema");
-    selectProblema.style.display = "none";
-    console.log("hidden");
-    var problemaComputador = document.getElementById("assunto");
-    problemaComputador.addEventListener('change', function(){
-      
-      if (problemaComputador.value == 1) 
-      {
-        selectProblema.style.display = "block";
-      }else
-      {
-        selectProblema.style.display = "none";
-      }
-      
-    });
-
-    var registrar = document.getElementById("enviarBtn");
-
-    registrar.addEventListener('click', function(event){
-      event.preventDefault();
-
-      var formData = {
-        'nome'            : $('#nome').val(),
-        'email'           : $('#email').val(),
-        'telefone'        : $('#telefone').val(),
-        'departamento'    : $('#departamento option:selected').val(),
-        'assunto'         : $('#assunto option:selected').val(),
-        'detalhe'         : $('#detalhes option:selected').val(),
-        'ocorrencia'      : $('#ocorrencia').val()
-      };
-
-      console.log(formData);
-      var url = "http://suporte.code/api/chamados";
-      //var url = "http://localhost:4040/api/chamados";
-      $.ajax({
-        type: "POST",
-        url: url,
-        data: formData
-      }) 
-      .done(function(response) {
-        console.log( "Sucesso:\n" );
-        console.log(response);
-        var sucesso = 1;
-        resultado(sucesso);
-      })
-      .fail(function() {
-        console.log( "error" );
-        var erro = 0;
-        resultado(erro);
-      })
-    });
-
-    function resultado(sucesso)
-    {
-      var loader = document.getElementById("loader");
-      loader.removeAttribute('display');
-      loader.style.display = null;
-      setTimeout(showPage,3000,sucesso);
-    }
-    
-
-    function showPage(sucesso)
-    {
-      document.getElementById("loader").style.display = "none";
-      sucesso === 0 ? document.getElementById("erro").style.display = "block" : document.getElementById("resultado").style.display = "block";  
-    }
-  </script>
+</script>
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cargo;
 use App\Models\Secretaria;
 use App\Models\Vinculo;
+use App\Models\Funcionario;
 
 class FuncionarioController extends Controller
 {
@@ -16,14 +17,9 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $cargos = Cargo::all();
-        $secretaria = Secretaria::all();
-        $vinculo = Vinculo::all();
+        $funcionarios = Funcionario::all();
         
-        //dd(compact(['cargos','secretaria','vinculo'])); Funçao De Debugar
-        
-
-        return view('funcionarios.index', compact(['cargos','secretaria','vinculo']));
+        return view('funcionarios.index', compact(['funcionarios']));
     }
 
     /**
@@ -33,7 +29,14 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        //
+        $cargos = Cargo::all();
+        $secretarias = Secretaria::all();
+        $vinculos = Vinculo::all();
+        
+        //dd(compact(['cargos','secretaria','vinculo'])); Funçao De Debugar
+        
+
+        return view('funcionarios.create', compact(['cargos','secretarias','vinculos']));
     }
 
     /**
@@ -44,7 +47,32 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /*$data = $request->validate(
+            [           
+                'nome' => 'required',
+                'cpf' => 'required',
+                'vinculo' => 'required',
+                'cargo' => 'required',
+                'secretaria' => 'required'
+            ]); */
+        $data = $request->all();    
+
+        $funcionario = new Funcionario; 
+        $funcionario->nome = $data["nome"];
+        $funcionario->cpf = $data["cpf"];
+        $funcionario->pis = $data["pis"];
+        $funcionario->telefone = $data["telefone"];  
+        $funcionario->observacao = $data["observacao"];        
+        $funcionario->vencimentos = strval($data["vencimentos"]);
+        $funcionario->matricula = $data["matricula"];
+        $funcionario->secretaria = $data["secretaria"];
+        $funcionario->vinculo = $data["vinculo"];
+        $funcionario->cargo = $data["cargo"];      
+        //dd($request->all());
+        //dd($funcionario);
+        $funcionario->save();
+        //return redirect(route("funcionarios.index"));
+        return redirect(url("funcionarios"));
     }
 
     /**
@@ -55,7 +83,10 @@ class FuncionarioController extends Controller
      */
     public function show($id)
     {
-        //
+        //$funcionario = Funcionario::with("_vinculo")->where("id", $funcionario->id)->first();
+        $funcionario = Funcionario::with(["_vinculo","_secretaria","_cargo"])->find($id);
+        //dd($funcionario);
+        return view("funcionarios.show",compact("funcionario"));
     }
 
     /**
@@ -64,9 +95,13 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Funcionario $funcionario)
     {
-        //
+        $cargos = Cargo::all();
+        $secretarias = Secretaria::all();
+        $vinculos = Vinculo::all();
+        
+        return view('funcionarios.edit', compact(['cargos','secretarias','vinculos',"funcionario"]));
     }
 
     /**
@@ -76,9 +111,25 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Funcionario $funcionario)
     {
-        //
+        $data = $request->all();    
+ 
+        $funcionario->nome = $data["nome"];
+        $funcionario->cpf = $data["cpf"];
+        $funcionario->pis = $data["pis"];
+        $funcionario->telefone = $data["telefone"];  
+        $funcionario->observacao = $data["observacao"];        
+        $funcionario->vencimentos = strval($data["vencimentos"]);
+        $funcionario->matricula = $data["matricula"];
+        $funcionario->secretaria = $data["secretaria"];
+        $funcionario->vinculo = $data["vinculo"];
+        $funcionario->cargo = $data["cargo"];      
+        //dd($request->all());
+        //dd($funcionario);
+        $funcionario->save();
+        return redirect(route("funcionarios.index"));
+        //dd($request->all());
     }
 
     /**
@@ -87,8 +138,9 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Funcionario $funcionario)
     {
-        //
+        $funcionario->delete();
+        return response("excluido com sucesso", 200);
     }
 }
