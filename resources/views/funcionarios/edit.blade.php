@@ -51,7 +51,7 @@
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="secretaria">Secretaria</label>
+                <label for="secretaria">Programa(Secretaria)</label>
                 <select id="secretaria" name="secretaria" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
                   <option selected>Escolha...</option>
                   @foreach($secretarias as $secretaria)
@@ -68,6 +68,18 @@
                   <option selected>Escolha...</option>
                   @foreach($vinculos as $vinculo) 
                         <option value="{{$vinculo->id}}"  @if($vinculo->id == $funcionario->vinculo) selected @endif >{{$vinculo->descricao}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="qualificacao">Qualificação</label>
+                <select id="qualificacao" name="qualificacao" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
+                  <option selected>Escolha...</option>
+                  @foreach($qualificacaos as $qualificacao)
+                        <option value="{{$qualificacao->id}}" @if($qualificacao->id == $funcionario->qualificacao) selected @endif{{$qualificacao->descricao}}>{{$qualificacao->descricao}}</option>
                   @endforeach
                 </select>
               </div>

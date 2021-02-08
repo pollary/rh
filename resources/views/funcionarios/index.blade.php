@@ -38,7 +38,7 @@
                 </tr>
           @empty
           <tr>
-            <td colspan="6" class="text-center">Parabéns!!! Não existem funcionarios abertos!</td>
+            <td colspan="6" class="text-center">Não existem Funcionarios Cadastrados!</td>
           </tr>
           @endforelse
         </tbody>

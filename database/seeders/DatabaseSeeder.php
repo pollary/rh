@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\CargoSeeder;
 use Database\Seeders\SecretariaSeeder;
 use Database\Seeders\VinculoSeeder;
+use Database\Seeders\Qualificacao;
 
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CargoSeeder::class);
         $this->call(SecretariaSeeder::class);
         $this->call(VinculoSeeder::class);
+        $this->call(QualificacaoSeeder::class);
     }
 }

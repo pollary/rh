@@ -10,7 +10,7 @@ class Funcionario extends Model
 {
     protected $primaryKey = "id"; 
     public $timestamps = true;
-    protected $fillable=['matricula','nome','cpf','secretaria','vinculo','pis','cargo','vencimentos','telefone','observacao'];
+    protected $fillable=['matricula','nome','cpf','secretaria','vinculo','pis','cargo','vencimentos','telefone','observacao','qualificacao'];
     //Apenas os Modificaveis.
 
     public function _vinculo()
@@ -24,5 +24,9 @@ class Funcionario extends Model
     public function _cargo()
     {
         return $this->hasOne("App\Models\Cargo", "id");
+    }
+    public function _qualificacao()
+    {
+        return $this->hasOne("App\Models\Qualificacao", "id");
     }
 }

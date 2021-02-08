@@ -17,17 +17,18 @@ class CreateFuncionariosTable extends Migration
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('matricula')->nullable(); //nullable deixa o campo ser vazio.
-            $table->string("vencimentos")->nullable();
+            $table->string('matricula')->nullable(); //nullable deixa o campo ser vazio.        
             $table->string("nome");
             $table->string("cpf",14);
             $table->string("pis",14)->nullable();
+            $table->string("vencimentos")->nullable();
             $table->string("telefone")->nullable();
-            $table->text("observacao")->nullable();
             $table->unsignedBigInteger('secretaria')->unsigned();
             $table->unsignedBigInteger('vinculo')->unsigned();
             $table->unsignedBigInteger('cargo')->unsigned();
-                   
+            //$table->date("admissao")->nullable();
+            $table->unsignedBigInteger('qualificacao')->unsigned();
+            $table->text("observacao")->nullable();       
         });
 
         Schema::table('funcionarios', function (Blueprint $table)
@@ -35,6 +36,7 @@ class CreateFuncionariosTable extends Migration
             $table->foreign('vinculo')->references('id')->on('vinculos');
             $table->foreign('secretaria')->references('id')->on('secretarias');
             $table->foreign('cargo')->references('id')->on('cargos');
+            $table->foreign('qualificacao')->references('id')->on('qualificacaos');
 
         });
     }

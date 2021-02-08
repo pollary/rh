@@ -7,6 +7,7 @@ use App\Models\Cargo;
 use App\Models\Secretaria;
 use App\Models\Vinculo;
 use App\Models\Funcionario;
+use App\Models\Qualificacao;
 
 class FuncionarioController extends Controller
 {
@@ -32,11 +33,12 @@ class FuncionarioController extends Controller
         $cargos = Cargo::all();
         $secretarias = Secretaria::all();
         $vinculos = Vinculo::all();
+        $qualificacaos = Qualificacao::all();
         
         //dd(compact(['cargos','secretaria','vinculo'])); Funçao De Debugar
         
 
-        return view('funcionarios.create', compact(['cargos','secretarias','vinculos']));
+        return view('funcionarios.create', compact(['cargos','secretarias','vinculos','qualificacaos']));
     }
 
     /**
@@ -67,6 +69,7 @@ class FuncionarioController extends Controller
         $funcionario->matricula = $data["matricula"];
         $funcionario->secretaria = $data["secretaria"];
         $funcionario->vinculo = $data["vinculo"];
+        $funcionario->qualificacao = $data["qualificacao"];
         $funcionario->cargo = $data["cargo"];      
         //dd($request->all());
         //dd($funcionario);
@@ -84,7 +87,7 @@ class FuncionarioController extends Controller
     public function show($id)
     {
         //$funcionario = Funcionario::with("_vinculo")->where("id", $funcionario->id)->first();
-        $funcionario = Funcionario::with(["_vinculo","_secretaria","_cargo"])->find($id);
+        $funcionario = Funcionario::with(["_vinculo","_secretaria","_cargo","_qualificacao"])->find($id);
         //dd($funcionario);
         return view("funcionarios.show",compact("funcionario"));
     }
@@ -100,8 +103,8 @@ class FuncionarioController extends Controller
         $cargos = Cargo::all();
         $secretarias = Secretaria::all();
         $vinculos = Vinculo::all();
-        
-        return view('funcionarios.edit', compact(['cargos','secretarias','vinculos',"funcionario"]));
+        $qualificacaos = Qualificacao::all();
+        return view('funcionarios.edit', compact(['cargos','secretarias','vinculos',"funcionario","qualificacaos"]));
     }
 
     /**
@@ -124,6 +127,7 @@ class FuncionarioController extends Controller
         $funcionario->matricula = $data["matricula"];
         $funcionario->secretaria = $data["secretaria"];
         $funcionario->vinculo = $data["vinculo"];
+        $funcionario->qualificacao = $data["qualificacao"];
         $funcionario->cargo = $data["cargo"];      
         //dd($request->all());
         //dd($funcionario);

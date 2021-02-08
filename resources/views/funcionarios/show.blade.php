@@ -50,15 +50,22 @@
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="secretaria">Secretaria</label>
+                <label for="secretaria">Programa(Secretaria)</label>
                 <p><b>{{$funcionario->_secretaria["descricao"]}}</b></p>
               </div>
             </div>
-
+            
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="vinculo">Vinculo</label>
                 <p><b>{{$funcionario->_vinculo["descricao"]}}</b></p>
+              </div>
+            </div>
+           
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="qualificacao">Qualificação</label>
+                <p><b>{{$funcionario->_qualificacao["descricao"]}}</b></p>
               </div>
             </div>
 
