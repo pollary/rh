@@ -8,7 +8,7 @@ use App\Models\Secretaria;
 use App\Models\Vinculo;
 use App\Models\Funcionario;
 use App\Models\Qualificacao;
-
+use Carbon\Carbon;
 class FuncionarioController extends Controller
 {
     /**
@@ -19,7 +19,9 @@ class FuncionarioController extends Controller
     public function index()
     {
         $funcionarios = Funcionario::all();
-        
+        $funcionarios= Funcionario::all()->sortByDesc('admissao')->values(); //ISSO AKE FAZ A LISTA DE USUARIOS FICAR DO ANO MAS NOVO PARA O MAIS VELHO!
+        //$funcionarios= Funcionario::all()->sortBy('admissao')->values();  //ORDENA A LISTA DE USUARIOS DO MAIS VELHO PARA O MAIS NOVO!
+        //dd($funcionarios);
         return view('funcionarios.index', compact(['funcionarios']));
     }
 
@@ -58,7 +60,7 @@ class FuncionarioController extends Controller
                 'secretaria' => 'required'
             ]); */
         $data = $request->all();    
-
+            
         $funcionario = new Funcionario; 
         $funcionario->nome = $data["nome"];
         $funcionario->cpf = $data["cpf"];
@@ -67,10 +69,26 @@ class FuncionarioController extends Controller
         $funcionario->observacao = $data["observacao"];        
         $funcionario->vencimentos = strval($data["vencimentos"]);
         $funcionario->matricula = $data["matricula"];
-        $funcionario->secretaria = $data["secretaria"];
-        $funcionario->vinculo = $data["vinculo"];
-        $funcionario->qualificacao = $data["qualificacao"];
-        $funcionario->cargo = $data["cargo"];      
+        if($data["secretaria"] != -1)
+            $funcionario->secretaria = $data["secretaria"];
+        if($data["vinculo"] != -1)
+            $funcionario->vinculo = $data["vinculo"];
+        if($data["qualificacao"] != -1)
+            $funcionario->qualificacao = $data["qualificacao"];
+        if($data["cargo"] != -1)
+            $funcionario->cargo = $data["cargo"];      
+        //dd($data);
+        if(isset($data['admissao']))
+        {
+            $dia_mes_ano = array();
+            $pattern = '/(.*)\/(.*)\/(.*)/';
+            preg_match($pattern, $data['admissao'], $dia_mes_ano);
+            $date = Carbon::createFromDate($dia_mes_ano[3],$dia_mes_ano[2],$dia_mes_ano[1], 'UTC');
+            //dd($date);
+            $admissao = $date->format('Y-m-d H:i:s');
+            $funcionario->admissao = $admissao;            
+        }    
+            
         //dd($request->all());
         //dd($funcionario);
         $funcionario->save();
@@ -89,6 +107,21 @@ class FuncionarioController extends Controller
         //$funcionario = Funcionario::with("_vinculo")->where("id", $funcionario->id)->first();
         $funcionario = Funcionario::with(["_vinculo","_secretaria","_cargo","_qualificacao"])->find($id);
         //dd($funcionario);
+        return view("funcionarios.show",compact("funcionario"));
+        //Carbon::new($funcionario->admissao)->format('Y');  Filtro para Ano na busca de Admissao.
+    }
+
+    public function showByCpf($cpf)
+    {
+        $funcionario = Funcionario::with(["_vinculo","_secretaria","_cargo","_qualificacao"])
+                                ->where("cpf", $cpf)->first();     // FUNÇAO DE PESQUISA DO CPF    
+        return view("funcionarios.show",compact("funcionario"));
+    }
+
+    public function showByName($nome)
+    {
+        $funcionario = Funcionario::with(["_vinculo","_secretaria","_cargo","_qualificacao"])
+                                ->where("nome","like","%${nome}%")->first();     // FUNÇAO DE PESQUISA DO CPF    
         return view("funcionarios.show",compact("funcionario"));
     }
 

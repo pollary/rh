@@ -19,7 +19,8 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class,'index']);
 Route::resource('funcionarios',FuncionarioController::class);       //resource = get,post,edit,delete
-
+Route::get('funcionarios/cpf/{cpf}',[FuncionarioController::class, 'showByCpf']);
+Route::get('funcionarios/nome/{nome}',[FuncionarioController::class, 'showByName']);
 
 
 //Endereço antigo:

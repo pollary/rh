@@ -48,6 +48,11 @@
               <label for="telefone">Telefone</label>
               <p><b>{{$funcionario->telefone}}</b></p>
             </div>
+            <div class="form-group">
+              <label for="admissao">Data de Admissão</label>
+              <p><b>{{$funcionario->data_admissao}}</b></p>
+            </div>
+            
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="secretaria">Programa(Secretaria)</label>
@@ -109,6 +114,7 @@
         $('.cpf').mask('000.000.000-00', {reverse: true});
         $('.pis').mask('0000.000.00/00', {reverse: true});
         $('.vencimentos').mask("000.000.000.000.000,00", {reverse: true});
+        $('.date').mask('00/00/0000');
     });
    
 

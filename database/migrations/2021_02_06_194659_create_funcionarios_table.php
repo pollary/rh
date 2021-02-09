@@ -26,7 +26,7 @@ class CreateFuncionariosTable extends Migration
             $table->unsignedBigInteger('secretaria')->unsigned();
             $table->unsignedBigInteger('vinculo')->unsigned();
             $table->unsignedBigInteger('cargo')->unsigned();
-            //$table->date("admissao")->nullable();
+            $table->date("admissao")->nullable();
             $table->unsignedBigInteger('qualificacao')->unsigned();
             $table->text("observacao")->nullable();       
         });

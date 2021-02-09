@@ -48,11 +48,17 @@
               <label for="telefone">Telefone</label>
               <input type="text" class="form-control telefone" name="telefone" id="telefone">
             </div>
+
+            <div class="form-group">
+              <label for="admissao">Data</label>
+              <input type="text" class="form-control date" name="admissao" id="admissao">
+            </div>
+
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="secretaria">Programa(Secretaria)</label>
+                <label for="secretaria">Programa(Secretaria) <span class="red">*</span></label>
                 <select id="secretaria" name="secretaria" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
-                  <option selected>Escolha...</option>
+                  <option selected value="-1">Escolha...</option>
                   @foreach($secretarias as $secretaria)
                     <option value="{{$secretaria->id}}">{{$secretaria->descricao}}</option>
                   @endforeach
@@ -62,9 +68,9 @@
 
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="vinculo">Vinculo</label>
+                <label for="vinculo">Vinculo <span class="red">*</span></label>
                 <select id="vinculo" name="vinculo" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
-                  <option selected>Escolha...</option>
+                  <option selected value="-1">Escolha...</option>
                   @foreach($vinculos as $vinculo) 
                         <option value="{{$vinculo->id}}">{{$vinculo->descricao}}</option>
                   @endforeach
@@ -74,9 +80,9 @@
 
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="qualificacao">Qualificação</label>
+                <label for="qualificacao">Qualificação <span class="red">*</span></label>
                 <select id="qualificacao" name="qualificacao" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
-                  <option selected>Escolha...</option>
+                  <option selected value="-1">Escolha...</option>
                   @foreach($qualificacaos as $qualificacao)
                         <option value="{{$qualificacao->id}}">{{$qualificacao->descricao}}</option>
                   @endforeach
@@ -86,9 +92,9 @@
 
             <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="cargo">Cargo</label>
+                <label for="cargo">Cargo<span class="red">*</span></label>
                 <select id="cargo" name="cargo" class="form-control selectpicker" data-show-subtext="true" data-live-search="true">
-                  <option selected>Escolha...</option>
+                  <option selected value="-1">Escolha...</option>
                   @foreach($cargos as $cargo)
                         <option value="{{$cargo->id}}">{{$cargo->descricao}}</option>
                   @endforeach
@@ -131,6 +137,7 @@
   $('.cpf').mask('000.000.000-00', {reverse: true});
   $('.pis').mask('0000.000.00/00', {reverse: true});
   $('.vencimentos').mask("000.000.000.000.000,00", {reverse: true});
+  $('.date').mask('00/00/0000');
 });
    
 
