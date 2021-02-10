@@ -20,7 +20,7 @@
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="matricula">Matrícula</label>
-                <input type="text" class="form-control" name="matricula" id="matricula" value="{{$funcionario->matricula}}">
+                <input type="text" class="form-control matricula" name="matricula" id="matricula" value="{{$funcionario->matricula}}">
               </div>
             </div>
             <div class="form-group">
@@ -127,7 +127,7 @@
   <script type="text/javascript">
    
    $(document).ready(function(){
-
+  $('.matricula').mask('00.000-0', {reverse: true});
   $('.telefone').mask('(00) 00000-0000'); 
   $('.cpf').mask('000.000.000-00', {reverse: true});
   $('.pis').mask('0000.000.00/00', {reverse: true});

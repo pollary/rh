@@ -17,7 +17,7 @@ class CreateFuncionariosTable extends Migration
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('matricula')->nullable(); //nullable deixa o campo ser vazio.        
+            $table->string('matricula',6)->nullable(); //nullable deixa o campo ser vazio.        
             $table->string("nome");
             $table->string("cpf",14);
             $table->string("pis",14)->nullable();

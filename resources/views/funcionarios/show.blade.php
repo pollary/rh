@@ -109,7 +109,7 @@
   <script type="text/javascript">
    
    $(document).ready(function(){
-
+        $('.matricula').mask('00.000-0', {reverse: true});
         $('.telefone').mask('(00) 0000-0000'); 
         $('.cpf').mask('000.000.000-00', {reverse: true});
         $('.pis').mask('0000.000.00/00', {reverse: true});
@@ -134,12 +134,12 @@
             })
 
             swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Tem Certeza?',
+            text: "Você Não Podera Reverter Isso!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
+            confirmButtonText: 'Sim, DELETE ISSO!',
+            cancelButtonText: 'Não, CANCELE!',
             reverseButtons: true
             }).then((result) => {
             if (result.isConfirmed) {
@@ -173,17 +173,17 @@
 
 
                 swalWithBootstrapButtons.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
+                'Deletedo!',
+                'Seu Registro Foi Deletado.',
+                'successo'
                 )
             } else if (
                 /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your imaginary file is safe :)',
+                'Cancelado',
+                'Seu Arquivo Esta Salvo :)',
                 'error'
                 )
             }
