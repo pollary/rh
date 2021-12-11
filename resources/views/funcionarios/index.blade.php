@@ -32,7 +32,7 @@
           @forelse ($funcionarios ?: [] as $funcionario)
                 <tr class="ponteiro" role="button" data-href="{{url("/funcionarios/{$funcionario->id}")}}">
                     <th scope="row">{{$funcionario->matricula}}</th>
-                    <td>{{$funcionario->nome}}</td>
+                    <td>{{ucwords($funcionario->nome)}}</td> <!--funçao padronizar nomes primeiro maiusculo de cada-->
                     <td>{{$funcionario->cpf}}</td>
                     <td>{{$funcionario->telefone}}</td>            
                 </tr>

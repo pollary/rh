@@ -1,10 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\HomeController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,11 +15,15 @@ use App\Http\Controllers\HomeController;
 */
 
 
-Route::get('/', [HomeController::class,'index']);
-Route::resource('funcionarios',FuncionarioController::class);       //resource = get,post,edit,delete
-Route::get('funcionarios/cpf/{cpf}',[FuncionarioController::class, 'showByCpf']);
-Route::get('funcionarios/nome/{nome}',[FuncionarioController::class, 'showByName']);
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/', [HomeController::class,'index']);
+    Route::resource('funcionarios',FuncionarioController::class);       //resource = get,post,edit,delete
+    Route::get('funcionarios/cpf/{cpf}',[FuncionarioController::class, 'showByCpf']);
+    Route::get('funcionarios/nome/{nome}',[FuncionarioController::class, 'showByName']);
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
 
-//Endereço antigo:
-//http://187.115.70.244:4556/sig/app.html#/servicosonline/portal-servidor
+require __DIR__.'/auth.php';
