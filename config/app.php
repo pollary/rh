@@ -28,6 +28,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'admin_password' => env('APP_ADMIN_PASSWORD', '123456'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

@@ -36,9 +36,9 @@ class FuncionarioController extends Controller
         $secretarias = Secretaria::all();
         $vinculos = Vinculo::all();
         $qualificacaos = Qualificacao::all();
-        
+
         //dd(compact(['cargos','secretaria','vinculo'])); Funçao De Debugar
-        
+
 
         return view('funcionarios.create', compact(['cargos','secretarias','vinculos','qualificacaos']));
     }
@@ -52,21 +52,21 @@ class FuncionarioController extends Controller
     public function store(Request $request)
     {
         /*$data = $request->validate(
-            [           
+            [
                 'nome' => 'required',
                 'cpf' => 'required',
                 'vinculo' => 'required',
                 'cargo' => 'required',
                 'secretaria' => 'required'
             ]); */
-        $data = $request->all();    
-            
-        $funcionario = new Funcionario; 
+        $data = $request->all();
+
+        $funcionario = new Funcionario;
         $funcionario->nome = $data["nome"];
         $funcionario->cpf = $data["cpf"];
         $funcionario->pis = $data["pis"];
-        $funcionario->telefone = $data["telefone"];  
-        $funcionario->observacao = $data["observacao"];        
+        $funcionario->telefone = $data["telefone"];
+        $funcionario->observacao = $data["observacao"];
         $funcionario->vencimentos = strval($data["vencimentos"]);
         $funcionario->matricula = $data["matricula"];
         if($data["secretaria"] != -1)
@@ -76,7 +76,7 @@ class FuncionarioController extends Controller
         if($data["qualificacao"] != -1)
             $funcionario->qualificacao = $data["qualificacao"];
         if($data["cargo"] != -1)
-            $funcionario->cargo = $data["cargo"];      
+            $funcionario->cargo = $data["cargo"];
         //dd($data);
         if(isset($data['admissao']))
         {
@@ -86,9 +86,9 @@ class FuncionarioController extends Controller
             $date = Carbon::createFromDate($dia_mes_ano[3],$dia_mes_ano[2],$dia_mes_ano[1], 'UTC');
             //dd($date);
             $admissao = $date->format('Y-m-d H:i:s');
-            $funcionario->admissao = $admissao;            
-        }    
-            
+            $funcionario->admissao = $admissao;
+        }
+
         //dd($request->all());
         //dd($funcionario);
         $funcionario->save();
@@ -114,15 +114,25 @@ class FuncionarioController extends Controller
     public function showByCpf($cpf)
     {
         $funcionario = Funcionario::with(["_vinculo","_secretaria","_cargo","_qualificacao"])
-                                ->where("cpf", $cpf)->first();     // FUNÇAO DE PESQUISA DO CPF    
+                                ->where("cpf", $cpf)->first();     // FUNÇAO DE PESQUISA DO CPF
         return view("funcionarios.show",compact("funcionario"));
     }
 
     public function showByName($nome)
     {
-        $funcionario = Funcionario::with(["_vinculo","_secretaria","_cargo","_qualificacao"])
-                                ->where("nome","like","%${nome}%")->first();     // FUNÇAO DE PESQUISA DO CPF    
-        return view("funcionarios.show",compact("funcionario"));
+        $funcionario = Funcionario::with(["_vinculo", "_secretaria", "_cargo", "_qualificacao"])
+            ->where("nome", "like", "%${nome}%")->get();     // FUNÇAO DE PESQUISA DO CPF
+
+        if (sizeof($funcionario) <= 1)
+        {
+            $funcionario = $funcionario[0];
+            return view("funcionarios.show",compact("funcionario"));
+        } else
+        {
+            $funcionarios = $funcionario;
+            return view("funcionarios.index",compact("funcionarios"));
+        }
+
     }
 
     /**
@@ -149,19 +159,19 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, Funcionario $funcionario)
     {
-        $data = $request->all();    
- 
+        $data = $request->all();
+
         $funcionario->nome = $data["nome"];
         $funcionario->cpf = $data["cpf"];
         $funcionario->pis = $data["pis"];
-        $funcionario->telefone = $data["telefone"];  
-        $funcionario->observacao = $data["observacao"];        
+        $funcionario->telefone = $data["telefone"];
+        $funcionario->observacao = $data["observacao"];
         $funcionario->vencimentos = strval($data["vencimentos"]);
         $funcionario->matricula = $data["matricula"];
         $funcionario->secretaria = $data["secretaria"];
         $funcionario->vinculo = $data["vinculo"];
         $funcionario->qualificacao = $data["qualificacao"];
-        $funcionario->cargo = $data["cargo"];      
+        $funcionario->cargo = $data["cargo"];
         //dd($request->all());
         //dd($funcionario);
         $funcionario->save();

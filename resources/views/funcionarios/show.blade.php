@@ -12,6 +12,7 @@
   <div class="row">
     <div class="col-sm-12 col-md-12">
 			<div class="jumbotron">
+        @if($funcionario)
         <h1 style="text-align: center;">Funcionário - {{$funcionario->nome}}</h1>
         <div class="box-ticket">
           <form id="formulario">     <!--açao de enviar para o BD-->
@@ -52,21 +53,21 @@
               <label for="admissao">Data de Admissão</label>
               <p><b>{{$funcionario->data_admissao}}</b></p>
             </div>
-            
+
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="secretaria">Programa(Secretaria)</label>
                 <p><b>{{$funcionario->_secretaria["descricao"]}}</b></p>
               </div>
             </div>
-            
+
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="vinculo">Vinculo</label>
                 <p><b>{{$funcionario->_vinculo["descricao"]}}</b></p>
               </div>
             </div>
-           
+
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="qualificacao">Qualificação</label>
@@ -84,14 +85,17 @@
               <label for="observacao">Observação:</label>
               <div class="input-group">
                 <textarea class="form-control" rows="5" readonly>{{$funcionario->observacao}}</textarea>
-              </div>  
+              </div>
             </div>
             <div class="form-group" style="margin-top: 10px; text-align: center;">
                 <a role="button" class="btn btn-warning" href="{{url("/funcionarios/{$funcionario->id}/edit")}}">Editar</a>
                 <button  class="btn btn-danger" id="deletarBtn" >Deletar</button>
               </div>
-          </form>  
+          </form>
         </div>
+        @else
+          <h1 style="text-align: center;">Funcionário Não Encontrado!</h1>
+        @endif
       </div>
     </div>
   </div>
@@ -107,18 +111,18 @@
   <script type="text/javascript" src="{{asset('vendor/js/bootstrap-select.min.js')}}"></script>
 
   <script type="text/javascript">
-   
+
    $(document).ready(function(){
         $('.matricula').mask('00.000-0', {reverse: true});
-        $('.telefone').mask('(00) 0000-0000'); 
+        $('.telefone').mask('(00) 0000-0000');
         $('.cpf').mask('000.000.000-00', {reverse: true});
         $('.pis').mask('0000.000.00/00', {reverse: true});
         $('.vencimentos').mask("000.000.000.000.000,00", {reverse: true});
         $('.date').mask('00/00/0000');
     });
-   
 
-    $("#fomulario").submit(function() {      
+
+    $("#fomulario").submit(function() {
         $(".vencimentos").unmask();
     });
 
@@ -149,11 +153,11 @@
                 }
             });
 
-
+            @if($funcionario)
                 $.ajax({
                 type: "DELETE",
                 url: "{{url("/funcionarios/{$funcionario->id}")}}"
-            }) 
+            })
             .done(function(response) {
                 console.log( "Sucesso:\n" );
                 console.log(response);
@@ -167,6 +171,7 @@
             .fail(function() {
                 console.log( "error" );
             });
+            @endif
 
 
 
@@ -188,8 +193,8 @@
                 )
             }
             })
-    
-    
+
+
     });
 
 

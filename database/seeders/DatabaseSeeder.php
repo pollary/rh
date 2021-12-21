@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SecretariaSeeder::class);
         $this->call(VinculoSeeder::class);
         $this->call(QualificacaoSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
